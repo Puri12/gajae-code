@@ -143,10 +143,10 @@ UserPromptSubmit structured steering directives are a planned/deferred routing s
 
 Ultragoal execution should use GJC's bundled role-agent roster when a durable story is large enough to benefit from delegation:
 
-- Use `executor` for bounded implementation, refactoring, and fix slices.
-- Use `planner` for story sequencing or handoff refinement when execution uncovers a missing plan branch.
-- Use `architect` for read-only architecture and code-review lanes, including `CLEAR` / `WATCH` / `BLOCK` status.
-- Use `critic` for read-only plan or handoff critique before execution proceeds.
+- Use `sisyphus-junior` for bounded implementation, refactoring, and fix slices; use `hephaestus` for deep multi-step implementation that needs its own exploration.
+- Use `metis` for story sequencing or handoff refinement when execution uncovers a missing plan branch.
+- Use `oracle` for read-only architecture and code-review lanes, including `CLEAR` / `WATCH` / `BLOCK` status.
+- Use `momus` for read-only plan or handoff critique before execution proceeds.
 
 When delegating with native subagents, an await timeout only limits the leader's wait. It is not subagent failure evidence and must not be used as a cancellation reason; inspect or continue independent work, and cancel only when the subagent has actually failed, gone off-track, or become unrecoverably wrong.
 
@@ -154,7 +154,7 @@ If an Ultragoal request has no approved plan or consensus artifact, run `ralplan
 
 The Ultragoal leader owns `.gjc/ultragoal/goals.json` and `.gjc/ultragoal/ledger.jsonl`. Role agents return implementation/review evidence; they do not checkpoint Ultragoal or mutate goal state.
 
-For large subgoals with independent slices, the Ultragoal leader must spawn parallel `executor` subagents instead of doing serial solo work. Split only cleanly separable files/surfaces, give each executor bounded targets and acceptance criteria, and keep checkpoint ownership in the leader. Use `architect` / `critic` review lanes after integration; do not let worker agents mutate `.gjc/ultragoal` or call goal tools.
+For large subgoals with independent slices, the Ultragoal leader must spawn parallel `sisyphus-junior` subagents instead of doing serial solo work. Split only cleanly separable files/surfaces, give each worker bounded targets and acceptance criteria, and keep checkpoint ownership in the leader. Use `oracle` / `momus` review lanes after integration; do not let worker agents mutate `.gjc/ultragoal` or call goal tools.
 
 ## Use Ultragoal and Team together
 
@@ -175,7 +175,7 @@ The completion-gate cleanup sweep is driven by `ai-slop-cleaner`, an internal Ul
 - It is not slash-command discoverable, has no public skill-listing entry, and is never resolvable through `skill://`.
 - It is a read-only detector+reporter over the active story's changed files only: it never edits code, writes files, mutates `.gjc/`, checkpoints, calls goal tools, or spawns workflows.
 - It classifies every finding as blocking or advisory across the full taxonomy (fallback-like masking vs. grounded, duplication, dead code, needless abstraction, boundary violations, UI/design slop, missing tests).
-- The leader and a leader-spawned `executor` own all fixes; the cleaner reruns until zero blocking findings remain. Advisory findings live in the gate report only.
+- The leader and a leader-spawned `sisyphus-junior` own all fixes; the cleaner reruns until zero blocking findings remain. Advisory findings live in the gate report only.
 - Recursion guard: it must not spawn nested `ralplan`/`team`/`deep-interview`/`ultragoal`; broad or architectural findings are handed back to the leader as review blockers.
 
 ## Mandatory completion cleanup and review gate
@@ -183,14 +183,14 @@ The completion-gate cleanup sweep is driven by `ai-slop-cleaner`, an internal Ul
 An ultragoal story cannot be checkpointed `complete` until the active agent has run the quality gate. The gate is plan-first, contract-driven, and surface-based:
 
 1. Run targeted implementation verification for the story.
-2. Run the internal ai-slop-cleaner skill fragment as the final cleanup sweep on the story's changed files only, before verification and red-team so only clean code is reviewed. It is a read-only detector that emits an `AI SLOP CLEANUP REPORT`; if there are no relevant edits it still runs and records a passed/no-op report. Every BLOCKING cleaner finding is a completion blocker: the leader spawns an `executor` to fix blocking findings only, then reruns the cleaner until blocking findings are zero. Advisory findings are included in the gate report only and are not written to the Ultragoal ledger. Carry the report through the existing `qualityGate.iteration.evidence` field; do not add a new top-level quality-gate key.
+2. Run the internal ai-slop-cleaner skill fragment as the final cleanup sweep on the story's changed files only, before verification and red-team so only clean code is reviewed. It is a read-only detector that emits an `AI SLOP CLEANUP REPORT`; if there are no relevant edits it still runs and records a passed/no-op report. Every BLOCKING cleaner finding is a completion blocker: the leader spawns a `sisyphus-junior` to fix blocking findings only, then reruns the cleaner until blocking findings are zero. Advisory findings are included in the gate report only and are not written to the Ultragoal ledger. Carry the report through the existing `qualityGate.iteration.evidence` field; do not add a new top-level quality-gate key.
 3. Rerun verification after the cleaner pass.
-4. Delegate an `architect` review covering all three lanes:
+4. Delegate an `oracle` review covering all three lanes:
    - architecture-side: system boundaries, layering, data/control flow, operational risks.
    - product-side: user-visible behavior, acceptance criteria, edge cases, regressions.
    - code-side: maintainability, tests, integration points, and unsafe shortcuts.
-5. Delegate an `executor` QA/red-team lane to build and run the e2e/read-teaming QA suite appropriate for the story. This lane must try to break the change, not just confirm the happy path. It must start from the approved plan/spec/acceptance criteria, then user-facing contracts, and only then implementation code as supporting evidence. Plan/code mismatches are blockers, not items to paper over with implementation intent.
-6. The executor QA/red-team lane must prove evidence by the real surface under test:
+5. Delegate a `sisyphus-junior` QA/red-team lane to build and run the e2e/read-teaming QA suite appropriate for the story. This lane must try to break the change, not just confirm the happy path. It must start from the approved plan/spec/acceptance criteria, then user-facing contracts, and only then implementation code as supporting evidence. Plan/code mismatches are blockers, not items to paper over with implementation intent.
+6. The QA/red-team lane must prove evidence by the real surface under test:
    - GUI/web surfaces require a valid automation transcript plus a non-uniform screenshot. Bare `inlineEvidence` text or typed receipts never prove live GUI/web execution.
    - CLI surfaces require runtime argv replay: `replaySafe: true`, an allowlisted argv `command`, and replayed normalized stdout matching `recordedStdout`; unsafe commands require audited `replayExempt` metadata plus a structurally valid fallback artifact.
    - Native/desktop/tui surfaces require a structurally valid screenshot, PTY capture with terminal control codes, or app-automation transcript.
@@ -199,7 +199,7 @@ An ultragoal story cannot be checkpointed `complete` until the active agent has 
 8. Run a final code review pass and fold it into the strict quality gate. Clean means `architectReview.architectureStatus`, `architectReview.productStatus`, and `architectReview.codeStatus` are all `"CLEAR"`, `architectReview.recommendation` is `"APPROVE"`, executor QA statuses are `"passed"`, iteration is `"passed"` with `fullRerun: true`, every evidence field is non-empty, every required matrix row is present, and every blockers array is empty. `COMMENT`, `WATCH`, `REQUEST CHANGES`, `BLOCK`, missing evidence, missing or shallow matrix rows, plan/code mismatches, or non-empty blockers are non-clean.
 9. If any lane finds an issue, do **not** checkpoint `complete` and do **not** call `goal({"op":"complete"})`. Record durable blocker work instead:
    ```sh
-   gjc ultragoal record-review-blockers --goal-id <id> --title "Resolve verification blockers" --objective "<blocker-resolution objective>" --evidence "<architect/executor findings>" --gjc-goal-json <active-goal-get-json-or-path>
+   gjc ultragoal record-review-blockers --goal-id <id> --title "Resolve verification blockers" --objective "<blocker-resolution objective>" --evidence "<oracle/sisyphus-junior findings>" --gjc-goal-json <active-goal-get-json-or-path>
    ```
 10. Complete or steer through the blocker story, then rerun the full blocking verification loop. Repeat until all verifier lanes are clean.
 11. Only after the loop is clean, checkpoint the story as complete with a structured quality gate and a fresh active `goal({"op":"get"})` snapshot. The checkpoint creates a receipt; `goals.json.status` alone is not proof. In aggregate mode, the final aggregate receipt must exist before `goal({"op":"complete"})` is allowed.
@@ -215,15 +215,15 @@ The native `checkpoint --status complete` command rejects missing or shallow gat
     "productStatus": "CLEAR",
     "codeStatus": "CLEAR",
     "recommendation": "APPROVE",
-    "evidence": "architect review synthesis with architecture/product/code coverage",
-    "commands": ["architect review command or agent evidence id"],
+    "evidence": "oracle review synthesis with architecture/product/code coverage",
+    "commands": ["oracle review command or agent evidence id"],
     "blockers": []
   },
   "executorQa": {
     "status": "passed",
     "e2eStatus": "passed",
     "redTeamStatus": "passed",
-    "evidence": "executor-built e2e and red-team QA commands/results",
+    "evidence": "sisyphus-junior-built e2e and red-team QA commands/results",
     "e2eCommands": ["bun test:e2e"],
     "redTeamCommands": ["bun test:red-team"],
     "artifactRefs": [

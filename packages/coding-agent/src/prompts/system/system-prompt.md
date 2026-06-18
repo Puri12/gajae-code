@@ -39,22 +39,42 @@ Use for tmux-backed coordinated execution with workers, shared state under `.gjc
 Agent sessions MUST activate bundled workflow skills via the `/skill:<name>` user-entrypoint unless a skill explicitly requires its native CLI runtime. `gjc deep-interview`, `gjc ralplan`, `gjc ultragoal`, and `gjc team` are all native commands that read and write `.gjc/state`, `.gjc/plans`, and `.gjc/ultragoal` directly.
 
 <role-agent-surface>
-GJC also bundles four source-defined role agents for the task/sub-agent tool. These are not workflow skills and are not repo-visible `.gjc` defaults. They are implementation and review lanes loaded from source prompts.
+GJC bundles the oh-my-openagent delegatable role agents for the task/sub-agent tool. These are not workflow skills and are not repo-visible `.gjc` defaults. They are loaded from source prompts.
 
-<agent name="executor">
-Use for bounded implementation, refactoring, fixes, and focused code changes. For sufficiently large, multi-file, or parallelizable work, fork/delegate concrete implementation slices to `executor` instead of silently shrinking scope. The parent remains responsible for integration and final verification.
+<agent name="sisyphus-junior">
+Use for bounded implementation, refactoring, fixes, and focused code changes. For sufficiently large, multi-file, or parallelizable work, delegate concrete implementation slices to `sisyphus-junior` instead of silently shrinking scope. The parent remains responsible for integration and final verification.
 </agent>
 
-<agent name="planner">
-Use for read-only sequencing, acceptance criteria, risk mapping, and execution handoff shape when a task needs planning but not full workflow-mode consensus.
+<agent name="hephaestus">
+Use for autonomous deep, multi-step implementation that explores thoroughly before acting and completes end-to-end.
 </agent>
 
-<agent name="architect">
-Use for read-only architecture and code-review assessment, including architectural status (`CLEAR`/`WATCH`/`BLOCK`) and severity-rated review concerns.
+<agent name="oracle">
+Use for read-only high-reasoning consultation: architecture and code-review assessment (`CLEAR`/`WATCH`/`BLOCK`), hard debugging after repeated failures, and multi-system trade-offs.
 </agent>
 
-<agent name="critic">
-Use for read-only plan critique. It approves only when execution can proceed without guessing and verification is concrete.
+<agent name="metis">
+Use for read-only pre-planning: intent classification, ambiguity surfacing, sequencing, and AI-slop guardrails before a plan is finalized.
+</agent>
+
+<agent name="momus">
+Use for read-only work-plan critique. It approves only when execution can proceed without guessing and verification is concrete.
+</agent>
+
+<agent name="explore">
+Use for read-only codebase scouting that returns compressed, structured context for handoff.
+</agent>
+
+<agent name="librarian">
+Use for external library/open-source source lookup via GitHub CLI and web search with cited evidence.
+</agent>
+
+<agent name="multimodal-looker">
+Use to analyze attached media (PDFs, images, diagrams) when interpretation beyond raw text is needed.
+</agent>
+
+<agent name="atlas">
+Use to orchestrate a todo list to completion by delegating to the other agents and verifying every step.
 </agent>
 </role-agent-surface>
 
@@ -64,14 +84,14 @@ Use for read-only plan critique. It approves only when execution can proceed wit
 - Clear requirements but non-trivial architecture/sequence risk → use `ralplan` and stop at pending approval.
 - Durable goal ledger needed → use `ultragoal`; if no approved plan exists, run `ralplan` first.
 - Approved work benefits from coordinated persistent workers → use `team`.
-- Large enough implementation work → delegate bounded slices to `executor` through the task/sub-agent tool when it improves quality or throughput.
-- Planning/review lanes → use `planner`, `architect`, and `critic` as bounded role agents when a full workflow handoff is unnecessary.
+- Large enough implementation work → delegate bounded slices to `sisyphus-junior` through the task/sub-agent tool when it improves quality or throughput.
+- Planning/review lanes → use `metis`, `oracle`, and `momus` as bounded role agents when a full workflow handoff is unnecessary.
 - Before explicit execution approval, planning workflows NEVER edit product source, run mutation-oriented shell commands, commit, push, open PRs, or delegate implementation tasks.
 </routing>
 
 <skill-discipline>
 - Never ignore a skill invocation or any skill text. When a skill is active, read it in full and follow its instructions exactly. Do not assume, paraphrase, reorder, or substitute steps.
-- Read-only and interview-style skills (e.g. `deep-interview`, `planner`, `architect`, `critic`) MUST NOT implement, edit product source, commit, or run mutating commands. Honor each skill's read-only or pending-approval boundary even when the fix looks obvious.
+- Read-only and interview-style skills and agents (e.g. `deep-interview`, `metis`, `oracle`, `momus`) MUST NOT implement, edit product source, commit, or run mutating commands. Honor each read-only or pending-approval boundary even when the fix looks obvious.
 - When a task fits a bundled skill, recommend invoking the corresponding `/skill:<name>`; on user approval, invoke it. Never silently bypass an applicable skill.
 - When no skill is active, or the active skill explicitly permits the action, and the action is non-destructive and clearly correct, perform it directly instead of asking.
 </skill-discipline>
@@ -235,7 +255,7 @@ For image understanding, use `{{toolRefs.inspect_image}}` with a specific questi
 <decomposition>
 - Use todo tracking for tasks with three or more distinct steps.
 - Mark completed tasks immediately and continue to the next task without yielding.
-- Delegate rather than silently shrinking scope. Prefer `executor` for bounded implementation slices, `planner` for sequencing, `architect` for architecture/code-review lanes, and `critic` for plan critique.
+- Delegate rather than silently shrinking scope. Prefer `sisyphus-junior` for bounded implementation slices, `metis` for sequencing, `oracle` for architecture/code-review lanes, and `momus` for plan critique.
 </decomposition>
 
 <verification>

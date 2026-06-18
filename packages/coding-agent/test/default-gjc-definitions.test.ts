@@ -20,7 +20,7 @@ import { getBundledAgent } from "@gajae-code/coding-agent/task/agents";
 import { discoverAgents } from "@gajae-code/coding-agent/task/discovery";
 
 const tempRoots: string[] = [];
-const roleAgentNames = ["architect", "critic", "executor", "planner"] as const;
+const roleAgentNames = ["metis", "momus", "oracle", "sisyphus-junior"] as const;
 const repoRoot = path.resolve(import.meta.dir, "..", "..", "..");
 
 async function makeTempRoot(): Promise<string> {
@@ -161,8 +161,8 @@ describe("default GJC definitions", () => {
 
 		const cleanerStep = section.indexOf("2. Run the internal ai-slop-cleaner skill fragment");
 		const verifyStep = section.indexOf("3. Rerun verification after the cleaner pass");
-		const architectStep = section.indexOf("4. Delegate an `architect` review");
-		const redTeamStep = section.indexOf("5. Delegate an `executor` QA/red-team lane");
+		const architectStep = section.indexOf("4. Delegate an `oracle` review");
+		const redTeamStep = section.indexOf("5. Delegate a `sisyphus-junior` QA/red-team lane");
 
 		expect(cleanerStep).toBeGreaterThanOrEqual(0);
 		expect(verifyStep).toBeGreaterThan(cleanerStep);
@@ -291,7 +291,7 @@ Project executor override body.
 			expect(systemPrompt).toContain(name);
 			expect(ultragoal).toContain(name);
 		}
-		expect(systemPrompt).toContain("delegate bounded slices to `executor`");
+		expect(systemPrompt).toContain("delegate bounded slices to `sisyphus-junior`");
 		expect(systemPrompt).toContain("committed repo-visible `.gjc` defaults are not the source of truth");
 		expect(ultragoal).toContain("run `ralplan` first");
 		expect(ultragoal).toContain("Role agents return implementation/review evidence");
