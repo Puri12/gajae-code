@@ -28,20 +28,31 @@ describe("task agent visibility", () => {
 		vi.restoreAllMocks();
 	});
 
-	it("marks retained bundled support agents as hidden and role agents as visible", () => {
+	it("hides retired legacy role agents and support agents, and exposes the OmO roster", () => {
 		const agents = loadBundledAgents();
 		expect(agents.length).toBeGreaterThan(0);
 		const visibility = new Map(agents.map(agent => [agent.name, agent.hide]));
 
-		expect(visibility.get("explore")).toBe(true);
-		expect(visibility.get("plan")).toBe(true);
-		expect(visibility.get("reviewer")).toBe(true);
-		expect(visibility.get("task")).toBe(true);
+		const hidden = ["executor", "architect", "planner", "critic", "plan", "reviewer", "task"];
+		for (const name of hidden) {
+			expect(visibility.get(name)).toBe(true);
+		}
 
-		expect(visibility.get("executor")).toBeUndefined();
-		expect(visibility.get("architect")).toBeUndefined();
-		expect(visibility.get("planner")).toBeUndefined();
-		expect(visibility.get("critic")).toBeUndefined();
+		const visibleRoster = [
+			"oracle",
+			"librarian",
+			"explore",
+			"multimodal-looker",
+			"metis",
+			"momus",
+			"hephaestus",
+			"sisyphus-junior",
+			"atlas",
+		];
+		for (const name of visibleRoster) {
+			expect(visibility.has(name)).toBe(true);
+			expect(visibility.get(name) ?? false).toBe(false);
+		}
 	});
 
 	it("omits hidden agents from task tool descriptions and unknown-agent hints", async () => {
