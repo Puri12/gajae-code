@@ -4330,7 +4330,7 @@ export function parseTeamLaunchArgs(argv: string[]): GjcTeamStartOptions {
 	const positionals = parsedWorktree.remainingArgs.filter(arg => !arg.startsWith("--"));
 	const dryRun = argv.includes("--dry-run");
 	let workerCount = GJC_TEAM_DEFAULT_WORKERS;
-	let agentType = "executor";
+	let agentType = "sisyphus-junior";
 	let taskStartIndex = 0;
 	const first = positionals[0] ?? "";
 	const countRole = first.match(/^(\d+):([a-zA-Z][a-zA-Z0-9_-]*)$/);
@@ -4338,13 +4338,13 @@ export function parseTeamLaunchArgs(argv: string[]): GjcTeamStartOptions {
 	const roleOnly = first.match(/^([a-zA-Z][a-zA-Z0-9_-]*)$/);
 	if (countRole) {
 		workerCount = Number.parseInt(countRole[1] ?? "", 10);
-		agentType = countRole[2] ?? "executor";
+		agentType = countRole[2] ?? "sisyphus-junior";
 		taskStartIndex = 1;
 	} else if (countOnly) {
 		workerCount = Number.parseInt(countOnly[1] ?? "", 10);
 		taskStartIndex = 1;
 	} else if (roleOnly && positionals.length > 1) {
-		agentType = roleOnly[1] ?? "executor";
+		agentType = roleOnly[1] ?? "sisyphus-junior";
 		taskStartIndex = 1;
 	}
 	const task = positionals.slice(taskStartIndex).join(" ").trim();

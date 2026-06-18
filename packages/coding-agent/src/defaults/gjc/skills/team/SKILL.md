@@ -43,7 +43,7 @@ gjc team [N:agent-type] "<task description>"
 Examples:
 
 ```bash
-gjc team 3:executor "analyze feature X and report flaws"
+gjc team 3:sisyphus-junior "analyze feature X and report flaws"
 gjc team "debug flaky integration tests"
 gjc team "ship end-to-end fix with verification"
 ```
@@ -68,12 +68,12 @@ Workers provide task status and verification evidence only. They do not own Ultr
 
 ### Worker command override
 
-Important: `N:agent-type` (for example `3:executor`) selects the worker count and role prompt. Plain `gjc team "task"` defaults to 3 executor workers; `gjc team 1:executor "task"` is the explicit single-worker form.
+Important: `N:agent-type` (for example `3:sisyphus-junior`) selects the worker count and role prompt. Plain `gjc team "task"` defaults to 3 sisyphus-junior workers; `gjc team 1:sisyphus-junior "task"` is the explicit single-worker form.
 
 To launch the worker with a specific GJC-compatible command, use `GJC_TEAM_WORKER_COMMAND`:
 
 ```bash
-GJC_TEAM_WORKER_COMMAND="bun packages/coding-agent/src/cli.ts" gjc team executor "update docs and report"
+GJC_TEAM_WORKER_COMMAND="bun packages/coding-agent/src/cli.ts" gjc team sisyphus-junior "update docs and report"
 ```
 
 ## Preconditions
@@ -260,7 +260,7 @@ gjc team api transition-task-status --input '{"team_name":"my-team","task_id":"t
 gjc team api update-worker-status --input '{"team_name":"my-team","worker_id":"worker-1","status":"working","current_task_id":"task-1"}' --json
 gjc team api recover-stale-claims --input '{"team_name":"my-team"}' --json
 gjc team api read-traces --input '{"team_name":"my-team"}' --json
-gjc team api create-task --input '{"team_name":"my-team","subject":"Verify delivery","description":"Run verification","owner":"worker-1","lane":"verification","required_role":"executor","depends_on":["task-1"]}' --json
+gjc team api create-task --input '{"team_name":"my-team","subject":"Verify delivery","description":"Run verification","owner":"worker-1","lane":"verification","required_role":"sisyphus-junior","depends_on":["task-1"]}' --json
 ```
 
 Canonical worker lifecycle operations:
@@ -370,7 +370,7 @@ tmux kill-pane -t %451
 # cleanup verb documented by the current manifest
 
 # 4) Retry
-gjc team executor "fresh retry"
+gjc team sisyphus-junior "fresh retry"
 ```
 
 Guidelines:
@@ -411,7 +411,7 @@ Two cleanup paths exist and must not be confused:
 ### Automation example
 
 ```
-1. gjc team executor "fix bugs"
+1. gjc team sisyphus-junior "fix bugs"
 2. gjc team status <team-name>
 3. gjc team shutdown <team-name>
 4. Clean up the finished team state for <team-name>

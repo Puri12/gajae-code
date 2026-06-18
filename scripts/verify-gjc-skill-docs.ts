@@ -41,7 +41,7 @@ function stripInlineCode(line: string): string {
 }
 
 function isRoleSelectorVerb(line: string, commandEndIndex: number): boolean {
-	return line.slice(0, commandEndIndex).endsWith("gjc team executor") && /\bgjc\s+team\s+executor\s+["'`]/u.test(line);
+	return line.slice(0, commandEndIndex).endsWith("gjc team sisyphus-junior") && /\bgjc\s+team\s+sisyphus-junior\s+["'`]/u.test(line);
 }
 
 
