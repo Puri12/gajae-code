@@ -125,14 +125,21 @@ Gajae-Code ships four default workflow skills:
 | `ultragoal`      | Tracks goals through execution, revision, verification, and evidence. |
 | `team`           | Coordinates tmux-backed workers when parallel execution is worth it.  |
 
-And four bundled role agents:
+And the oh-my-openagent delegatable role-agent roster:
 
-| Agent       | What it does                                       |
-| ----------- | -------------------------------------------------- |
-| `executor`  | Bounded implementation, fixes, and refactors.      |
-| `architect` | Read-only architecture and code-review assessment. |
-| `planner`   | Read-only sequencing and acceptance criteria.      |
-| `critic`    | Read-only plan critique and actionability review.  |
+| Agent              | What it does                                              |
+| ------------------ | --------------------------------------------------------- |
+| `oracle`           | Read-only high-reasoning consultation; hard debugging and architecture. |
+| `librarian`        | External docs and open-source source lookup.              |
+| `explore`          | Read-only codebase scout returning compressed context.    |
+| `multimodal-looker`| Analyzes attached media (PDFs, images, diagrams).         |
+| `metis`            | Read-only pre-planning consultant.                        |
+| `momus`            | Read-only work-plan reviewer.                             |
+| `hephaestus`       | Autonomous deep worker for complex implementation.        |
+| `sisyphus-junior`  | Focused implementation executor.                          |
+| `atlas`            | Orchestrates a todo list to completion via delegation.    |
+
+The legacy `executor`/`architect`/`planner`/`critic` agents are retired from the public roster but retained internally so the `ralplan`, `team`, and `ultragoal` workflows keep working.
 
 No sprawling default skill zoo: GJC improves by making this small method better.
 

@@ -4,7 +4,7 @@ Gajae-Code (`gjc`) is this repository's coding-agent implementation. Treat this 
 
 ## Public workflow surface
 
-GJC intentionally exposes exactly four default workflow skills. Do not add, document, install, or route to additional default workflow definitions without an explicit product decision and gate update. GJC also bundles exactly four source-defined task role agents for delegation; these are not workflow skills and are not committed repo-visible `.gjc` defaults.
+GJC intentionally exposes exactly four default workflow skills. Do not add, document, install, or route to additional default workflow definitions without an explicit product decision and gate update. The public delegatable role-agent roster is the oh-my-openagent roster (nine agents); these are not workflow skills and are not committed repo-visible `.gjc` defaults.
 
 | Workflow skill | Purpose | Bundled source file |
 | --- | --- | --- |
@@ -15,15 +15,22 @@ GJC intentionally exposes exactly four default workflow skills. Do not add, docu
 
 | Role agent | Purpose | Bundled source file |
 | --- | --- | --- |
-| `executor` | Bounded implementation/fix/refactor tasks. | `packages/coding-agent/src/prompts/agents/executor.md` |
-| `architect` | Read-only architecture and code-review lane. | `packages/coding-agent/src/prompts/agents/architect.md` |
-| `planner` | Read-only sequencing and handoff planning lane. | `packages/coding-agent/src/prompts/agents/planner.md` |
-| `critic` | Read-only plan critique and actionability review. | `packages/coding-agent/src/prompts/agents/critic.md` |
+| `oracle` | Read-only high-reasoning consultation for hard debugging and architecture. | `packages/coding-agent/src/prompts/agents/oracle.md` |
+| `librarian` | External docs and open-source source lookup via GitHub CLI and web search. | `packages/coding-agent/src/prompts/agents/librarian.md` |
+| `explore` | Read-only codebase scout returning compressed, structured context. | `packages/coding-agent/src/prompts/agents/explore.md` |
+| `multimodal-looker` | Analyzes attached media (PDFs, images, diagrams). | `packages/coding-agent/src/prompts/agents/multimodal-looker.md` |
+| `metis` | Read-only pre-planning consultant (intent, ambiguity, AI-slop guards). | `packages/coding-agent/src/prompts/agents/metis.md` |
+| `momus` | Read-only work-plan reviewer (executability and reference verification). | `packages/coding-agent/src/prompts/agents/momus.md` |
+| `hephaestus` | Autonomous deep worker for complex multi-step implementation. | `packages/coding-agent/src/prompts/agents/hephaestus.md` |
+| `sisyphus-junior` | Focused implementation executor (no further delegation). | `packages/coding-agent/src/prompts/agents/sisyphus-junior.md` |
+| `atlas` | Orchestrator that delegates a todo list to completion via `task()`. | `packages/coding-agent/src/prompts/agents/atlas.md` |
+
+The legacy role agents `executor`, `architect`, `planner`, and `critic` are retired from the public roster (`hide: true`) but remain bundled because `ralplan`, `team`, `ultragoal`, and the model-assignment targets still reference them by name.
 
 Rules:
 - Bundled default workflow skills load from `packages/coding-agent/src/defaults/gjc/skills`.
 - Bundled role agents load from `packages/coding-agent/src/prompts/agents`.
-- `architect`, `planner`, and `critic` remain read-only for product files, but may use their restricted `bash` tool only for sanctioned workflow CLI persistence (`gjc ralplan --write ...`) and GJC workflow state read/write/contract commands (`gjc state ...`); the bash tool blocks env overrides, direct handoffs, state clears, artifact file-path ingestion, and all other command shapes for those role agents.
+- The retained `architect`, `planner`, and `critic` agents remain read-only for product files, but may use their restricted `bash` tool only for sanctioned workflow CLI persistence (`gjc ralplan --write ...`) and GJC workflow state read/write/contract commands (`gjc state ...`); the bash tool blocks env overrides, direct handoffs, state clears, artifact file-path ingestion, and all other command shapes for those role agents.
 - Do not commit repo-visible `.gjc` default definitions; runtime user/project `.gjc` discovery remains supported for local overrides and installed configs.
 - Runtime state, plans, specs, and workflow ledgers belong under `.gjc/`.
 - Preserve upstream attribution in source comments/docs where appropriate, but public commands, paths, and examples must use `gjc` and `.gjc`.
