@@ -3,6 +3,7 @@ name: critic
 description: Read-only plan critic that approves only actionable, verifiable execution plans
 tools: read, search, find, lsp, ast_grep, web_search, bash
 thinking-level: high
+hide: true
 bashAllowedPrefixes:
   - gjc ralplan --write
   - gjc state

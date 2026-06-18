@@ -18,6 +18,15 @@ import plannerMd from "../prompts/agents/planner.md" with { type: "text" };
 import reviewerMd from "../prompts/agents/reviewer.md" with { type: "text" };
 import taskMd from "../prompts/agents/task.md" with { type: "text" };
 
+import oracleMd from "../prompts/agents/oracle.md" with { type: "text" };
+import librarianMd from "../prompts/agents/librarian.md" with { type: "text" };
+import multimodalLookerMd from "../prompts/agents/multimodal-looker.md" with { type: "text" };
+import metisMd from "../prompts/agents/metis.md" with { type: "text" };
+import momusMd from "../prompts/agents/momus.md" with { type: "text" };
+import sisyphusJuniorMd from "../prompts/agents/sisyphus-junior.md" with { type: "text" };
+import hephaestusMd from "../prompts/agents/hephaestus.md" with { type: "text" };
+import atlasMd from "../prompts/agents/atlas.md" with { type: "text" };
+
 import type { AgentDefinition, AgentSource } from "./types";
 
 interface AgentFrontmatter {
@@ -50,7 +59,15 @@ const EMBEDDED_AGENT_DEFS: EmbeddedAgentDef[] = [
 	{ fileName: "architect.md", template: architectMd },
 	{ fileName: "planner.md", template: plannerMd },
 	{ fileName: "critic.md", template: criticMd },
+	{ fileName: "oracle.md", template: oracleMd },
+	{ fileName: "librarian.md", template: librarianMd },
 	{ fileName: "explore.md", template: exploreMd },
+	{ fileName: "multimodal-looker.md", template: multimodalLookerMd },
+	{ fileName: "metis.md", template: metisMd },
+	{ fileName: "momus.md", template: momusMd },
+	{ fileName: "sisyphus-junior.md", template: sisyphusJuniorMd },
+	{ fileName: "hephaestus.md", template: hephaestusMd },
+	{ fileName: "atlas.md", template: atlasMd },
 	{ fileName: "plan.md", template: planMd },
 	{ fileName: "reviewer.md", template: reviewerMd },
 	{

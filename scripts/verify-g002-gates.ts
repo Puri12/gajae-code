@@ -13,7 +13,7 @@ import * as path from "node:path";
 
 const repoRoot = path.join(import.meta.dir, "..");
 const EXPECTED_DEFINITIONS = ["deep-interview", "ralplan", "team", "ultragoal"] as const;
-const EXPECTED_ROLE_AGENTS = ["architect", "critic", "executor", "planner"] as const;
+const EXPECTED_ROLE_AGENTS = ["atlas", "explore", "hephaestus", "librarian", "metis", "momus", "multimodal-looker", "oracle", "sisyphus-junior"] as const;
 const EXPECTED_PUBLIC_PACKAGE_VERSION_CATALOG_KEY = "@gajae-code/coding-agent";
 const ALLOWED_PUBLIC_PACKAGE_VERSIONS = new Map<string, string>();
 const ALLOWED_PRIVATE_PACKAGE_VERSIONS = new Map<string, string>([

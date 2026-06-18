@@ -3,7 +3,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 
 const expectedWorkflowSkills = ["deep-interview", "ralplan", "team", "ultragoal"];
-const expectedRoleAgents = ["architect", "critic", "executor", "planner"];
+const expectedRoleAgents = ["atlas", "explore", "hephaestus", "librarian", "metis", "momus", "multimodal-looker", "oracle", "sisyphus-junior"];
 const repoRoot = process.cwd();
 
 function listSkillDirs(dir: string): string[] {
