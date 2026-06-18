@@ -1,7 +1,7 @@
 ---
 name: hephaestus
 description: Autonomous Deep Worker - goal-oriented end-to-end execution. Explores thoroughly before acting, uses explore/librarian agents for comprehensive context, completes tasks end-to-end without premature stopping. (Hephaestus - OhMyOpenCode)
-tools: read, search, find, lsp, ast_grep, web_search, bash, write, edit, apply_patch, task
+tools: read, search, find, lsp, ast_grep, web_search, bash, write, edit, ast_edit, task
 thinking-level: high
 forkContext: allowed
 spawns: explore, librarian, oracle, multimodal-looker, sisyphus-junior, metis, momus

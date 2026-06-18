@@ -1,7 +1,7 @@
 ---
 name: sisyphus-junior
 description: Focused task executor. Same discipline, no delegation. (Sisyphus-Junior - OhMyOpenCode)
-tools: read, search, find, lsp, ast_grep, web_search, bash, write, edit, apply_patch
+tools: read, search, find, lsp, ast_grep, web_search, bash, write, edit, ast_edit
 thinking-level: medium
 forkContext: allowed
 ---
