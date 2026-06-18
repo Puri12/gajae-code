@@ -11,8 +11,24 @@ import teamSkill from "./gjc/skills/team/SKILL.md" with { type: "text" };
 import aiSlopCleanerFragment from "./gjc/skills/ultragoal/ai-slop-cleaner.md" with { type: "text" };
 import ultragoalSkill from "./gjc/skills/ultragoal/SKILL.md" with { type: "text" };
 import ultraworkSkill from "./gjc/skills/ultrawork/SKILL.md" with { type: "text" };
+import ulwLoopSkill from "./gjc/skills/ulw-loop/SKILL.md" with { type: "text" };
+import ralphSkill from "./gjc/skills/ralph/SKILL.md" with { type: "text" };
+import autopilotSkill from "./gjc/skills/autopilot/SKILL.md" with { type: "text" };
+import ultraqaSkill from "./gjc/skills/ultraqa/SKILL.md" with { type: "text" };
+import hyperplanSkill from "./gjc/skills/hyperplan/SKILL.md" with { type: "text" };
 
-export const DEFAULT_GJC_DEFINITION_NAMES = ["deep-interview", "ralplan", "team", "ultragoal", "ultrawork"] as const;
+export const DEFAULT_GJC_DEFINITION_NAMES = [
+	"deep-interview",
+	"ralplan",
+	"team",
+	"ultragoal",
+	"ultrawork",
+	"ulw-loop",
+	"ralph",
+	"autopilot",
+	"ultraqa",
+	"hyperplan",
+] as const;
 export type DefaultGjcDefinitionName = (typeof DEFAULT_GJC_DEFINITION_NAMES)[number];
 export type DefaultGjcDefinitionKind = "skill" | "skill-fragment";
 export type EmbeddedDefaultGjcSkill = {
@@ -84,6 +100,11 @@ const DEFAULT_GJC_DEFINITIONS: readonly DefaultGjcDefinition[] = [
 	{ kind: "skill", name: "team", relativePath: "skills/team/SKILL.md", content: teamSkill },
 	{ kind: "skill", name: "ultragoal", relativePath: "skills/ultragoal/SKILL.md", content: ultragoalSkill },
 	{ kind: "skill", name: "ultrawork", relativePath: "skills/ultrawork/SKILL.md", content: ultraworkSkill },
+	{ kind: "skill", name: "ulw-loop", relativePath: "skills/ulw-loop/SKILL.md", content: ulwLoopSkill },
+	{ kind: "skill", name: "ralph", relativePath: "skills/ralph/SKILL.md", content: ralphSkill },
+	{ kind: "skill", name: "autopilot", relativePath: "skills/autopilot/SKILL.md", content: autopilotSkill },
+	{ kind: "skill", name: "ultraqa", relativePath: "skills/ultraqa/SKILL.md", content: ultraqaSkill },
+	{ kind: "skill", name: "hyperplan", relativePath: "skills/hyperplan/SKILL.md", content: hyperplanSkill },
 	{
 		kind: "skill-fragment",
 		parentSkillName: "deep-interview",
