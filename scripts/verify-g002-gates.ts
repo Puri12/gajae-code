@@ -12,7 +12,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 
 const repoRoot = path.join(import.meta.dir, "..");
-const EXPECTED_DEFINITIONS = ["deep-interview", "ralplan", "team", "ultragoal"] as const;
+const EXPECTED_DEFINITIONS = ["deep-interview", "ralplan", "team", "ultragoal", "ultrawork"] as const;
 const EXPECTED_ROLE_AGENTS = ["atlas", "explore", "hephaestus", "librarian", "metis", "momus", "multimodal-looker", "oracle", "sisyphus-junior"] as const;
 const EXPECTED_PUBLIC_PACKAGE_VERSION_CATALOG_KEY = "@gajae-code/coding-agent";
 const ALLOWED_PUBLIC_PACKAGE_VERSIONS = new Map<string, string>();
@@ -61,7 +61,6 @@ const FORBIDDEN_SKILL_PATTERNS: readonly RegExp[] = [
 	/\$autoresearch-goal/u,
 	/\$performance-goal/u,
 	/\$ultraqa/u,
-	/\$ultrawork/u,
 	/MCP/u,
 	/\/mcp/u,
 ];
@@ -82,7 +81,6 @@ const FORBIDDEN_WORKFLOW_SURFACE_TOKENS = [
 	"performance-goal",
 	"ralph",
 	"ultraqa",
-	"ultrawork",
 	"visual-ralph",
 ] as const;
 const REQUIRED_PRIVATE_EXPORT_BLOCKS = [

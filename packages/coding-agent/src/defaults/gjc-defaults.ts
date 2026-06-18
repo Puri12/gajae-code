@@ -10,8 +10,9 @@ import ralplanSkill from "./gjc/skills/ralplan/SKILL.md" with { type: "text" };
 import teamSkill from "./gjc/skills/team/SKILL.md" with { type: "text" };
 import aiSlopCleanerFragment from "./gjc/skills/ultragoal/ai-slop-cleaner.md" with { type: "text" };
 import ultragoalSkill from "./gjc/skills/ultragoal/SKILL.md" with { type: "text" };
+import ultraworkSkill from "./gjc/skills/ultrawork/SKILL.md" with { type: "text" };
 
-export const DEFAULT_GJC_DEFINITION_NAMES = ["deep-interview", "ralplan", "team", "ultragoal"] as const;
+export const DEFAULT_GJC_DEFINITION_NAMES = ["deep-interview", "ralplan", "team", "ultragoal", "ultrawork"] as const;
 export type DefaultGjcDefinitionName = (typeof DEFAULT_GJC_DEFINITION_NAMES)[number];
 export type DefaultGjcDefinitionKind = "skill" | "skill-fragment";
 export type EmbeddedDefaultGjcSkill = {
@@ -82,6 +83,7 @@ const DEFAULT_GJC_DEFINITIONS: readonly DefaultGjcDefinition[] = [
 	{ kind: "skill", name: "ralplan", relativePath: "skills/ralplan/SKILL.md", content: ralplanSkill },
 	{ kind: "skill", name: "team", relativePath: "skills/team/SKILL.md", content: teamSkill },
 	{ kind: "skill", name: "ultragoal", relativePath: "skills/ultragoal/SKILL.md", content: ultragoalSkill },
+	{ kind: "skill", name: "ultrawork", relativePath: "skills/ultrawork/SKILL.md", content: ultraworkSkill },
 	{
 		kind: "skill-fragment",
 		parentSkillName: "deep-interview",
