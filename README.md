@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/hero.png" alt="Gajae-Code autonomous coding-agent hero illustration" width="100%" />
+  <img src="assets/hero.png" alt="Ultra-Gajae-Code autonomous coding-agent hero illustration" width="100%" />
 </p>
 
-<h1 align="center">Gajae-Code</h1>
+<h1 align="center">Ultra-Gajae-Code</h1>
 
 <p align="center">
   <strong>Encode intention. Decode software.</strong><br />
-  A focused coding-agent runner for interviews, reviewed plans, tmux-native execution, and durable verification.
+  A focused coding-agent runner for interviews, reviewed plans, tmux-native execution, and durable verification — supercharged with the <a href="https://github.com/code-yeongyu/oh-my-openagent">oh-my-openagent</a> agent roster and mode skills.
 </p>
 
 <p align="center">
@@ -17,18 +17,18 @@
 </p>
 
 <p align="center">
-  <img src="assets/character.png" alt="Gajae-Code character mascot" width="320" />
+  <img src="assets/character.png" alt="Ultra-Gajae-Code character mascot" width="320" />
 </p>
 
-> Gajae-Code is an experimental, beta-stage project. Expect rough edges and verify outputs before relying on it for important work.
+> Ultra-Gajae-Code is a Gajae-Code fork that imports the [oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) agent roster and orchestration mode skills. It is experimental and beta-stage — expect rough edges and verify outputs before relying on it for important work.
 
 ## Website
 
 Visit **[gajae-code.com](https://gajae-code.com)** for the Gajae Code landing page, quick-start guide, architecture overview, harness notes, bridge/RPC docs, skills, receipts, remote-control design, and troubleshooting.
 
-## What is Gajae-Code?
+## What is Ultra-Gajae-Code?
 
-Gajae-Code (`gjc`) is an external coding-agent harness. It runs from the repository or worktree you choose, then gives the agent a small, explicit workflow surface:
+Ultra-Gajae-Code (`gjc`) is an external coding-agent harness — a Gajae-Code fork that adds oh-my-openagent's agents and orchestration modes. It runs from the repository or worktree you choose, then gives the agent a small, explicit workflow surface:
 
 ```text
 deep-interview -> ralplan -> ultragoal
@@ -116,7 +116,7 @@ Add `gjc team ...` only when coordinated tmux workers materially help.
 
 ## Workflow surface
 
-Gajae-Code ships four default workflow skills:
+Ultra-Gajae-Code ships ten default workflow skills — the four Gajae-Code workflows plus the oh-my-openagent mode set:
 
 | Skill            | What it does                                                          |
 | ---------------- | --------------------------------------------------------------------- |
@@ -124,6 +124,12 @@ Gajae-Code ships four default workflow skills:
 | `ralplan`        | Builds and critiques an implementation plan before mutation.          |
 | `ultragoal`      | Tracks goals through execution, revision, verification, and evidence. |
 | `team`           | Coordinates tmux-backed workers when parallel execution is worth it.  |
+| `ultrawork`      | Parallel execution engine — fans out independent work across agents.  |
+| `ulw-loop`       | Runs ultrawork iteratively until the task is complete and verified.   |
+| `ralph`          | Persistent execution loop to guaranteed completion with a review gate. |
+| `autopilot`      | Full autonomous pipeline: clarify, plan, execute, verify.             |
+| `ultraqa`        | QA cycling loop — test, fix, retest until the quality bar is met.     |
+| `hyperplan`      | Adversarial multi-agent planning before execution.                    |
 
 And the oh-my-openagent delegatable role-agent roster:
 
@@ -141,7 +147,7 @@ And the oh-my-openagent delegatable role-agent roster:
 
 The legacy `executor`/`architect`/`planner`/`critic` agents are retired from the public roster but retained internally so the `ralplan`, `team`, and `ultragoal` workflows keep working.
 
-No sprawling default skill zoo: GJC improves by making this small method better.
+The four core workflows stay the backbone; the bundled oh-my-openagent modes (`ultrawork`, `ulw-loop`, `ralph`, `autopilot`, `ultraqa`, `hyperplan`) add parallel and looped execution on top of the same method.
 
 ## Works beside your existing agent or bot
 
@@ -230,11 +236,11 @@ For a package-by-package map, see [`docs/codebase-overview.md`](docs/codebase-ov
 
 ## Contributors
 
-Thanks to the people and agents helping shape the early Gajae-Code releases, including [Yeachan-Heo](https://github.com/Yeachan-Heo), [IYENTeam](https://github.com/IYENTeam), and [HaD0Yun](https://github.com/HaD0Yun). Contributions, bug reports, and release validation are welcome through GitHub and the Discord community.
+Thanks to the people and agents shaping the Gajae-Code releases this fork builds on, including [Yeachan-Heo](https://github.com/Yeachan-Heo), [IYENTeam](https://github.com/IYENTeam), and [HaD0Yun](https://github.com/HaD0Yun), and to [code-yeongyu](https://github.com/code-yeongyu) for [oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent), whose agents and modes are imported here. Contributions, bug reports, and release validation are welcome through GitHub and the Discord community.
 
 ## Inspirations and lineage
 
-Gajae-Code's default TUI identity is the crustacean pair: red-claw for dark appearance and blue-crab for light appearance. It also bundles `claude-code`, `codex`, and `opencode` migration themes whose palettes are inspired by those tools so users moving from them get a familiar look. It builds on lessons from a small family of agent harnesses while keeping the public GJC surface intentionally focused. Historical attribution is kept in [`NOTICE.md`](NOTICE.md).
+Ultra-Gajae-Code's default TUI identity is the crustacean pair: red-claw for dark appearance and blue-crab for light appearance. It also bundles `claude-code`, `codex`, and `opencode` migration themes whose palettes are inspired by those tools so users moving from them get a familiar look. It builds on Gajae-Code and imports its delegatable agent roster and orchestration mode skills from [oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent), while keeping the public GJC surface intentionally focused. Historical attribution is kept in [`NOTICE.md`](NOTICE.md).
 
 ## License
 
@@ -242,7 +248,7 @@ MIT. See [`LICENSE`](LICENSE).
 
 ## GEO visibility benchmark
 
-Gajae-Code includes a [`geobench`](https://github.com/NomaDamas/geobench) product spec for measuring LLM hit rate, MRR, share of voice, and citations.
+Ultra-Gajae-Code includes a [`geobench`](https://github.com/NomaDamas/geobench) product spec for measuring LLM hit rate, MRR, share of voice, and citations.
 
 - Spec: [`geobench/gajae-code.yaml`](geobench/gajae-code.yaml)
 - Runbook: [`docs/geobench.md`](docs/geobench.md)
